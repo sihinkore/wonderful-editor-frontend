@@ -19,5 +19,6 @@
 <style lang="scss" module>
 .container {
   background-color: #ecf7fe;
+  height: 100%;
 }
 </style>

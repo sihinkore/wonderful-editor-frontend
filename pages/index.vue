@@ -1,7 +1,12 @@
 <template>
   <div>
-    <div v-for="article in articles" :key="article.id">
-      <div>{{ article }}</div>
+    <div
+      :class="$style.container"
+      v-for="article in articles"
+      :key="article.id"
+    >
+      <div>{{ article.title }}</div>
+      <div :class="$style.user_name">by {{ article.user.name }}</div>
     </div>
   </div>
 </template>
@@ -22,3 +27,16 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" module>
+.container {
+  background-color: white;
+  padding: 4px;
+  width: 800px;
+  // 画面中央寄せ
+  margin: auto;
+}
+.user_name {
+  border-bottom: solid 2px #cac7c7;
+}
+</style>
