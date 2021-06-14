@@ -6,7 +6,13 @@
       :key="article.id"
     >
       <div>{{ article.title }}</div>
-      <div :class="$style.user_name">by {{ article.user.name }}</div>
+      <div :class="$style.user_name">
+        by {{ article.user.name }}
+        <timeago
+          :datetime="article.updated_at"
+          :class="$style.create_time"
+        ></timeago>
+      </div>
     </div>
   </div>
 </template>
@@ -38,5 +44,9 @@ export default {
 }
 .user_name {
   border-bottom: solid 2px #cac7c7;
+}
+
+.create_time {
+  margin-left: 10px;
 }
 </style>
