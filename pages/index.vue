@@ -5,14 +5,24 @@
       v-for="article in articles"
       :key="article.id"
     >
-      <div>{{ article.title }}</div>
-      <div :class="$style.user_name">
-        by {{ article.user.name }}
-        <timeago
-          :datetime="article.updated_at"
-          :class="$style.create_time"
-        ></timeago>
-      </div>
+      <v-list-item>
+        <v-list-item-avatar>
+          <font-awesome-icon icon="user" style="font-size: 30px" />
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title :class="$style.article_title">{{
+            article.title
+          }}</v-list-item-title>
+          <v-list-item-subtitle>
+            by {{ article.user.name }}
+            <timeago
+              :datetime="article.updated_at"
+              :class="$style.create_time"
+            ></timeago>
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+      <v-divider class="mx-4"></v-divider>
     </div>
   </div>
 </template>
@@ -42,9 +52,10 @@ export default {
   // 画面中央寄せ
   margin: auto;
 }
-.user_name {
-  border-bottom: solid 2px #cac7c7;
-}
+
+// .user_name {
+//   border-bottom: solid 2px #cac7c7;
+// }
 
 .create_time {
   margin-left: 10px;
