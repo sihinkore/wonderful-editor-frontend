@@ -1,6 +1,6 @@
 export const state = () => {
   return {
-    headers: [],
+    headers: {},
   }
 }
 
@@ -13,9 +13,9 @@ export const mutations = {
 }
 
 export const actions = {
-  fetchHeaders({ commit }, response) {
+  async fetchHeaders({ commit }, params) {
+    const response = await this.$axios.post('api/v1/auth', params)
     const headers = response.headers
-
     const loginInfoHeaders = {
       'access-token': headers['access-token'],
       client: headers.client,

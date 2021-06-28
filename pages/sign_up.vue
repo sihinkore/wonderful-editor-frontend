@@ -41,9 +41,7 @@ export default {
         email: this.email,
         password: this.password,
       }
-      await this.$axios.post('/api/v1/auth', params).then((response) => {
-        this.$store.dispatch('signup/fetchHeaders', response)
-      })
+      await this.$store.dispatch('signup/fetchHeaders', params)
     },
   },
 }
