@@ -1,12 +1,6 @@
 <template>
   <v-card flat :class="$style.card">
-    <v-card-title> ユーザー登録 </v-card-title>
-    <v-text-field
-      label="アカウント名"
-      placeholder="お名前"
-      outlined
-      v-model="name"
-    ></v-text-field>
+    <v-card-title>ログイン </v-card-title>
     <v-text-field
       label="メールアドレス"
       placeholder="test@example.com"
@@ -20,7 +14,9 @@
       v-model="password"
     ></v-text-field>
     <div class="text-center">
-      <v-btn @click="submit" rounded color="primary" dark block> 登録 </v-btn>
+      <v-btn @click="submit" rounded color="warning" dark block>
+        ログイン
+      </v-btn>
     </div>
   </v-card>
 </template>
@@ -30,7 +26,6 @@ export default {
   data() {
     return {
       loading: false,
-      name: '',
       email: '',
       password: '',
     }
@@ -40,12 +35,11 @@ export default {
       // 多重送信を防ぐ
       this.loading = true
       const params = {
-        name: this.name,
         email: this.email,
         password: this.password,
       }
       try {
-        await this.$store.dispatch('user/signUp', params)
+        await this.$store.dispatch('user/signIn', params)
         this.$router.push('/')
       } catch (err) {
         alert(err.response.data.errors.full_messages)
@@ -56,6 +50,7 @@ export default {
   },
 }
 </script>
+
 <style lang="scss" module>
 .card {
   width: 600px;
