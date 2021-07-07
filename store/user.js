@@ -4,6 +4,10 @@ export const state = () => {
   }
 }
 
+export const getters = {
+  headers: (state) => state.headers,
+}
+
 export const mutations = {
   // 第一引数にstateと書くのは決まり。第二引数でactionから値を受け取る。
   setHeaders(state, loginInfoHeaders) {
