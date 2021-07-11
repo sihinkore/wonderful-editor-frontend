@@ -1,11 +1,13 @@
 export const state = () => {
   return {
     headers: {},
+    login: false,
   }
 }
 
 export const getters = {
   headers: (state) => state.headers,
+  login: (state) => state.login,
 }
 
 export const mutations = {
@@ -13,6 +15,9 @@ export const mutations = {
   setHeaders(state, loginInfoHeaders) {
     // stateのheadersにactionから渡ってきたloginInfoHeadersの値を代入
     state.headers = loginInfoHeaders
+  },
+  logIn(state) {
+    state.login = !state.login
   },
 }
 
@@ -40,5 +45,8 @@ export const actions = {
       'token-type': headers['token-type'],
     }
     commit('setHeaders', loginInfoHeaders)
+  },
+  logIn({ commit }) {
+    commit('logIn')
   },
 }
