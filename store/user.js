@@ -1,13 +1,13 @@
 export const state = () => {
   return {
     headers: {},
-    login: false,
+    isSignedIn: false,
   }
 }
 
 export const getters = {
   headers: (state) => state.headers,
-  login: (state) => state.login,
+  login: (state) => state.isSignedIn,
 }
 
 export const mutations = {
@@ -16,8 +16,9 @@ export const mutations = {
     // stateのheadersにactionから渡ってきたloginInfoHeadersの値を代入
     state.headers = loginInfoHeaders
   },
-  logIn(state) {
-    state.login = !state.login
+  // 第一引数にstateと書くのは決まり。第二引数でactionから値を受け取る。
+  setSigunInState(state, signInState) {
+    state.isSignedIn = signInState
   },
 }
 
@@ -33,6 +34,8 @@ export const actions = {
       'token-type': headers['token-type'],
     }
     commit('setHeaders', loginInfoHeaders)
+    // 新規登録した時ログインと同様trueの値を送る
+    commit('setSignInState', true)
   },
   async signIn({ commit }, params) {
     const response = await this.$axios.post('api/v1/auth/sign_in', params)
@@ -45,8 +48,7 @@ export const actions = {
       'token-type': headers['token-type'],
     }
     commit('setHeaders', loginInfoHeaders)
-  },
-  logIn({ commit }) {
-    commit('logIn')
+    // 新規登録した時ログインと同様trueの値を送る
+    commit('setSignInState', true)
   },
 }
