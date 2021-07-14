@@ -26,7 +26,6 @@ export default {
   data() {
     return {
       loading: false,
-      login: false,
       email: '',
       password: '',
     }
@@ -41,7 +40,6 @@ export default {
       }
       try {
         await this.$store.dispatch('user/signIn', params)
-        await this.$store.dispatch('user/logIn', this.login)
         this.$router.push('/')
       } catch (err) {
         alert(err.response.data.errors.full_messages)
