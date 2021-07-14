@@ -1,22 +1,26 @@
 <template>
   <v-app>
     <!-- ログインしていない時のヘッダーをv-ifで分岐 -->
-    <!-- ログインしていない時のヘッダー -->
-    <header v-if="login == false">
-      <v-app-bar color="blue" dark>
-        <v-toolbar-title>Wonderful Editor</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn outlined>ユーザー登録</v-btn>
-        <v-btn text>ログイン</v-btn>
-      </v-app-bar>
-    </header>
     <!-- ログインしている時のヘッダー -->
-    <header v-else>
+    <header v-if="isSignedIn">
       <v-app-bar color="blue" dark>
         <v-toolbar-title>Wonderful Editor</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn outlined>投稿する</v-btn>
-        <v-btn text>ログアウト</v-btn>
+        <v-btn text @click="logout">ログアウト</v-btn>
+      </v-app-bar>
+    </header>
+    <!-- ログインしていない時のヘッダー -->
+    <header v-else>
+      <v-app-bar color="blue" dark>
+        <v-toolbar-title>Wonderful Editor</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <nuxt-link to="/sign_up">
+          <v-btn outlined>ユーザー登録</v-btn>
+        </nuxt-link>
+        <nuxt-link to="/sign_in">
+          <v-btn text>ログイン</v-btn>
+        </nuxt-link>
       </v-app-bar>
     </header>
     <v-main>
@@ -30,8 +34,14 @@
 <script>
 export default {
   computed: {
-    get() {
-      return this.$store.state.user.login
+    isSignedIn() {
+      return this.$store.getters['user/isSignedIn']
+    },
+  },
+  methods: {
+    async logout() {
+      await this.$store.dispatch('user/logOut')
+      this.$router.push('/sign_in')
     },
   },
 }

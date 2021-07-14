@@ -7,7 +7,7 @@ export const state = () => {
 
 export const getters = {
   headers: (state) => state.headers,
-  login: (state) => state.isSignedIn,
+  isSignedIn: (state) => state.isSignedIn,
 }
 
 export const mutations = {
@@ -17,7 +17,7 @@ export const mutations = {
     state.headers = loginInfoHeaders
   },
   // 第一引数にstateと書くのは決まり。第二引数でactionから値を受け取る。
-  setSigunInState(state, signInState) {
+  setSignInState(state, signInState) {
     state.isSignedIn = signInState
   },
 }
@@ -48,7 +48,19 @@ export const actions = {
       'token-type': headers['token-type'],
     }
     commit('setHeaders', loginInfoHeaders)
-    // 新規登録した時ログインと同様trueの値を送る
+    // ログインした時trueの値を送る
     commit('setSignInState', true)
+  },
+  logOut({ commit }) {
+    const loginInfoHeaders = {
+      // 'access-token': '',
+      // client: '',
+      // expiry: '',
+      // uid: '',
+      // 'token-type': '',
+    }
+    commit('setHeaders', loginInfoHeaders)
+    // ログアウトした時falseの値を送る
+    commit('setSignInState', false)
   },
 }
