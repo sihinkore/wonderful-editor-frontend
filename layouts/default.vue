@@ -6,7 +6,9 @@
       <v-app-bar color="blue" dark>
         <v-toolbar-title>Wonderful Editor</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn outlined>投稿する</v-btn>
+        <nuxt-link to="/article">
+          <v-btn outlined>投稿する</v-btn>
+        </nuxt-link>
         <v-btn text @click="logout">ログアウト</v-btn>
       </v-app-bar>
     </header>
