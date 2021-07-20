@@ -11,10 +11,40 @@
       v-model="body"
     ></v-textarea>
     <div class="text-right">
-      <v-btn @click="submit" color="blue" dark> 投稿する </v-btn>
+      <v-btn @click="post" color="blue" dark> 投稿する </v-btn>
     </div>
   </v-card>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      loading: false,
+      title: '',
+      body: '',
+    }
+  },
+  methods: {
+    async post() {
+      // 多重送信を防ぐ
+      this.loading = true
+      const params = {
+        title: this.title,
+        body: this.body,
+        status: 'published',
+      }
+      try {
+        await this.$axios.post('api/v1/articles', params)
+        this.$router.push('/')
+      } catch (err) {
+        alert(err.response.data.errors.full_messages)
+      } finally {
+        this.loading = false
+      }
+    },
+  },
+}
+</script>
 
 <style lang="scss" module>
 .card {
