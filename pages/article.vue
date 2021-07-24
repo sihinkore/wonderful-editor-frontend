@@ -17,6 +17,8 @@
 </template>
 <script>
 export default {
+  // ログインしていなければ、記事作成ページに飛べない
+  middleware: 'redirect_signin',
   data() {
     return {
       loading: false,
