@@ -27,6 +27,7 @@
 
 <script>
 export default {
+  middleware: 'redirect_top',
   data() {
     return {
       loading: false,
