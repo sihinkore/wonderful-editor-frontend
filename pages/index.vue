@@ -10,9 +10,11 @@
           <font-awesome-icon icon="user" style="font-size: 30px" />
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title :class="$style.article_title">{{
-            article.title
-          }}</v-list-item-title>
+          <nuxt-link :to="'/articles/' + article.id">
+            <v-list-item-title :class="$style.article_title">{{
+              article.title
+            }}</v-list-item-title>
+          </nuxt-link>
           <v-list-item-subtitle>
             by {{ article.user.name }}
             <timeago
@@ -22,6 +24,7 @@
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
+
       <v-divider class="mx-4"></v-divider>
     </div>
   </div>
