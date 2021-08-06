@@ -1,8 +1,14 @@
 <template>
   <v-card>
-    <div>{{ article.user.name }}</div>
-    <v-card-title>{{ article.title }}</v-card-title>
-    <v-card-text>{{ article.body }}</v-card-text>
+    <template v-if="isInitialized">
+      <v-btn @click="deleteArticle" text :class="$style.trash">
+        <font-awesome-icon icon="trash-alt" style="font-size: 25px" />
+      </v-btn>
+      <div>{{ article.user.name }}</div>
+
+      <v-card-title>{{ article.title }}</v-card-title>
+      <v-card-text>{{ article.body }}</v-card-text>
+    </template>
   </v-card>
 </template>
 
@@ -21,6 +27,7 @@ export default {
       // 初期化完了フラグ
       isInitialized: false,
       id: this.$route.params.id,
+      // loading: false,
     }
   },
   async created() {
@@ -29,5 +36,27 @@ export default {
     await this.$store.dispatch('article/fetchArticleDetail', id)
     this.isInitialized = true
   },
+  methods: {
+    async deleteArticle() {
+      const id = this.id
+      // 多重送信を防ぐ
+      // this.loading = true
+      try {
+        await this.$axios.delete(`api/v1/articles/${id}`)
+        this.$router.push('/')
+      } catch (err) {
+        alert(err.response.data.errors.full_messages)
+      } finally {
+        // this.loading = false
+      }
+    },
+  },
 }
 </script>
+<style lang="scss" module>
+.trash {
+  float: right;
+  padding-right: 10px;
+  padding-top: 5px;
+}
+</style>
