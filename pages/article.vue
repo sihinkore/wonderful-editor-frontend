@@ -7,6 +7,7 @@
     ></v-text-field>
     <v-textarea
       placeholder="記事の内容を入力してください"
+      no-resize
       outlined
       v-model="body"
     ></v-textarea>
