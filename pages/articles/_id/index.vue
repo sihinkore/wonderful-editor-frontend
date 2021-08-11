@@ -49,13 +49,17 @@ export default {
       const id = this.id
       // 多重送信を防ぐ
       this.loading = true
-      try {
-        await this.$axios.delete(`api/v1/articles/${id}`)
-        this.$router.push('/')
-      } catch (err) {
-        alert(err.response.data.errors.full_messages)
-      } finally {
-        this.loading = false
+      const result = confirm('この記事を削除してもよろしいですか？')
+
+      if (result) {
+        try {
+          await this.$axios.delete(`api/v1/articles/${id}`)
+          this.$router.push('/')
+        } catch (err) {
+          alert(err.response.data.errors.full_messages)
+        } finally {
+          this.loading = false
+        }
       }
     },
   },

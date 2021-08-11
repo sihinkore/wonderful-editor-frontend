@@ -4,7 +4,11 @@
     <!-- ログインしている時のヘッダー -->
     <header v-if="isSignedIn">
       <v-app-bar color="blue" dark>
-        <v-toolbar-title>Wonderful Editor</v-toolbar-title>
+        <nuxt-link to="/" :class="$style.header_link">
+          <v-toolbar-title :class="$style.toolbar_title"
+            >Wonderful Editor</v-toolbar-title
+          >
+        </nuxt-link>
         <v-spacer></v-spacer>
         <nuxt-link to="/article">
           <v-btn outlined>投稿する</v-btn>
@@ -53,5 +57,11 @@ export default {
 .container {
   background-color: #ecf7fe;
   height: 100%;
+}
+.header_link {
+  text-decoration: none;
+}
+.toolbar_title {
+  color: white;
 }
 </style>
