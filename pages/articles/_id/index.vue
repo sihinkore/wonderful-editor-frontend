@@ -7,8 +7,17 @@
         text
         :class="$style.trash"
       >
-        <font-awesome-icon icon="trash-alt" style="font-size: 25px" />
+        <font-awesome-icon icon="trash-alt" style="font-size: 30px" />
       </v-btn>
+      <nuxt-link :to="article.id + '/edit'">
+        <v-btn
+          v-show="article.user.email === currentUserUid"
+          text
+          :class="$style.pencil"
+        >
+          <font-awesome-icon icon="edit" style="font-size: 30px" />
+        </v-btn>
+      </nuxt-link>
       <div>{{ article.user.name }}</div>
 
       <v-card-title>{{ article.title }}</v-card-title>
@@ -66,6 +75,9 @@ export default {
 }
 </script>
 <style lang="scss" module>
+.pencil {
+  float: right;
+}
 .trash {
   float: right;
   padding-right: 10px;
